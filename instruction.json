@@ -1,9 +1,9 @@
 {
-  "linkSetup": "",
-  "commandExtractNgrok": "",
-   "commandoToken": "",
-   "token": "",
-   "installNgrokPackage": "",
-   "commandStart": "",
-   "commandNgrok": ""
- }
+  "linkSetup": "https://dashboard.ngrok.com/get-started/setup",
+  "commandExtractNgrok": "unzip /path/to/ngrok.zip",
+  "commandoToken": "./ngrok authtoken",
+  "token": "1pd7WB7E9zfaLMh2k5BZC0fHbb6_59EmNP3aQ9NVjL1hVehWL",
+  "installNgrokPackage": "npm install ngrok",
+  "commandStart": "ngrok http https://localhost:8080/",
+  "commandNgrok": "/ngrok http 8080"
+}
