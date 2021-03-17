@@ -10,17 +10,19 @@ const getHeaderValue = (data, header) => {
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = null;
+const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n';
 
-const endOfResponse = null;
+const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    const clientIP = null;
+    const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
 
-    getLocationInfos(clientIP, (locationData) => {
+    getLocationInfos(clientIP, (/* locationData */) => {
       socket.write(startOfResponse);
-      socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
+      socket.write(
+        '<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">',
+      );
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
@@ -30,4 +32,8 @@ const server = net.createServer((socket) => {
   });
 });
 
-server.listen(8080);
+const PORT = 8080;
+
+server.listen(PORT);
+
+console.log(`Server TCP ativo!\nEscutando na porta: ${PORT}`);
