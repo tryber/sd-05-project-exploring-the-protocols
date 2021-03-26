@@ -76,7 +76,7 @@ describe('9 - Configurar a request HTTPS para enviar o endereço IP', () => {
   });
 });
 
-describe.only('10 - Responder o IP do client', () => {
+describe('10 - Responder o IP do client', () => {
   it('Será validado que ao acessar a url sera possível visualizar o ip do client', async () => {
     const instructions = fs.readFileSync('./instruction.json', 'utf8');
     const instructionsString = JSON.parse(instructions.toString());
