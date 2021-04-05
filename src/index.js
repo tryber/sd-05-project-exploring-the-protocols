@@ -1,4 +1,5 @@
 const net = require('net');
+const os = require('os');
 
 const { getLocationInfos } = require('./location');
 
@@ -17,7 +18,7 @@ const endOfResponse = '\r\n\r\n';
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
-    const clientSystemInfo = getHeaderValue(data.toString(), 'User-Agent');
+    const clientDeviceInfo = getHeaderValue(data.toString(), 'User-Agent');
 
     getLocationInfos(clientIP, (locationData) => {
       socket.write(startOfResponse);
@@ -26,12 +27,15 @@ const server = net.createServer((socket) => {
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
       socket.write(`<p data-testid="ip">${clientIP}</p>`);
-      socket.write(`<p data-testid="device">${clientSystemInfo}<p>`);
+      socket.write(`<p data-testid="device">${clientDeviceInfo}<p>`);
       socket.write(`<p data-testid="city">${locationData.city}</p>`);
       socket.write(`<p data-testid="postal_code">${locationData.postal_code}</p>`);
       socket.write(`<p data-testid="region">${locationData.region_name}</p>`);
       socket.write(`<p data-testid="country">${locationData.country_name}</p>`);
       socket.write(`<p data-testid="company">${locationData.company}</p>`);
+      socket.write(`<p data-testid="arch">${os.platform()} - ${os.arch()} - ${os.release()}<p>`);
+      socket.write(`<p data-testid="memory">${os.totalmem() / 1024 ** 3}<p>`);
+      socket.write(`<p data-testid="cpu">${os.cpus()}<p>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
     });
