@@ -1,7 +1,7 @@
 const https = require('https');
 
 const options = {
-  hostname: "iplocation.com",
+  hostname: 'iplocation.com',
   port: 443,
   path: '/',
   method: 'POST',
