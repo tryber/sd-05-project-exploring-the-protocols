@@ -18,8 +18,6 @@ const server = net.createServer((socket) => {
     console.log('clientIP: ', clientIP);
 
     getLocationInfos(clientIP, (locationData) => {
-      console.log(locationData);
-
       socket.write(startOfResponse);
       socket.write(
         '<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">',
@@ -27,10 +25,15 @@ const server = net.createServer((socket) => {
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write(`<h3 data-testid='ip'>client_ip: ${clientIP}</h3>`);
+      socket.write(`<p data-testid='city'>client\`s city: ${locationData}</p>`);
+      socket.write(`<p data-testid='posta_code'>client\`s postal code: ${locationData}</p>`);
+      socket.write(`<p data-testid='region'>client\`s region: ${locationData}</p>`);
+      socket.write(`<p data-testid='country'>client\`s country: ${locationData}</p>`);
+      socket.write(`<p data-testid='company'>client\`s Internet service name: ${locationData}</p>`);
+      socket.write('</body></html>');
       socket.write(
         '<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
       );
-      socket.write('</body></html>');
       socket.write(endOfResponse);
     });
   });
