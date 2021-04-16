@@ -13,8 +13,8 @@ const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF
 const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
-  socket.on('data', (data) => {
-    const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
+  socket.on('data', async (data) => {
+    const clientIP = await getHeaderValue(data.toString(), 'X-Forwarded-For');
     console.log('clientIP: ', clientIP);
 
     getLocationInfos(clientIP, (locationData) => {
@@ -26,6 +26,7 @@ const server = net.createServer((socket) => {
       );
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
+      socket.write(`<h3 data-testid='ip'>client_ip: ${clientIP}</h3>`);
       socket.write(
         '<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
       );
@@ -35,5 +36,5 @@ const server = net.createServer((socket) => {
   });
 });
 
-console.log(getHeaderValue());
+// console.log(getHeaderValue());
 server.listen(8080);
