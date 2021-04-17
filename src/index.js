@@ -21,7 +21,9 @@ const platform = os.platform();
 
 const release = os.release();
 
-const totalCores = os.cpus().length;
+const cpus = os.cpus();
+
+const totalCores = cpus.length;
 
 const cores = cpus.map((core) => `- modelo: ${core.model} - velocidade ${core.speed / 1000}GHz`);
 
