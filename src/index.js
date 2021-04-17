@@ -1,4 +1,4 @@
-/* const net = require('net');
+const net = require('net');
 
 const { getLocationInfos } = require('./location');
 
@@ -6,17 +6,23 @@ const getHeaderValue = (data, header) => {
   const headerData = data
     .split('\r\n')
     .find((chunk) => chunk.startsWith(header));
+  console.log('começo data', data, 'fim data')
+
+  console.log('começo header', headerData, 'fim header')
 
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = null;
+const startOfResponse = `${[
+  'HTTP/1.1 200 OK',
+  'Content-Type: text/html; charset=UTF-8',
+].join('\r\n')}\r\n\r\n`;
 
-const endOfResponse = null;
+const endOfResponse = `${[].join('\r\n')}\r\n\r\n`;
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    const clientIP = null;
+    const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
 
     getLocationInfos(clientIP, (locationData) => {
       socket.write(startOfResponse);
@@ -29,4 +35,3 @@ const server = net.createServer((socket) => {
 });
 
 server.listen(8080);
- */
