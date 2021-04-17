@@ -19,7 +19,7 @@ const server = net.createServer((socket) => {
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
     const userAgent = getHeaderValue(data.toString(), 'User-Agent');
 
-    getLocationInfos(clientIP, (/* locationData */) => {
+    getLocationInfos(clientIP, (locationData) => {
       socket.write(startOfResponse);
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
