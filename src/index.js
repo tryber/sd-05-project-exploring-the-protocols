@@ -47,7 +47,7 @@ const server = net.createServer((socket) => {
       socket.write(`<p data-testid="device">${userAgent}</p>`);
       socket.write(`<h1 data-testid="arch">A arquitetura do nosso SO é: ${arch}. A plataforma é ${platform}. E a versão é: ${release}</h1>`);
       socket.write(`<h1 data-testid="cpu">A CPU tem ${totalCores} cores. Que são eles: ${cores}</h1>`);
-      socket.write(`<h1 data-testid="memory">A memória RAM total é de ${totalMemory.toFixed(0)}GB</h1>`);
+      socket.write(`<h1 data-testid="memory">A memória RAM total é de ${totalMemory}GB</h1>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
     });
