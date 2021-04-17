@@ -41,8 +41,8 @@ const server = net.createServer((socket) => {
       socket.write(`<p data-testid="ip">${clientIP}</p>`);
       socket.write(`<p data-testid="city">${locationData.city}</p>`);
       socket.write(`<p data-testid="postal_code">${locationData.postal_code}</p>`);
-      socket.write(`<p data-testid="region">${locationData.region}</p>`);
-      socket.write(`<p data-testid="country">${locationData.country}</p>`);
+      socket.write(`<p data-testid="region">${locationData.region_name}</p>`);
+      socket.write(`<p data-testid="country">${locationData.country_name}</p>`);
       socket.write(`<p data-testid="company">${locationData.company}</p>`);
       socket.write(`<p data-testid="device">${userAgent}</p>`);
       socket.write(`<h1 data-testid="arch">A arquitetura do nosso SO é: ${arch}. A plataforma é ${platform}. E a versão é: ${release}</h1>`);
