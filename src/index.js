@@ -17,11 +17,19 @@ const endOfResponse = '\r\n\r\n';
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
+    const userAgent = getHeaderValue(data.toString(), 'User-Agent');
 
     getLocationInfos(clientIP, (/* locationData */) => {
       socket.write(startOfResponse);
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
+      socket.write(`<p data-testid="ip">${clientIP}</p>`);
+      socket.write(`<p data-testid="city">${locationData.city}</p>`);
+      socket.write(`<p data-testid="postal_code">${locationData.postal_code}</p>`);
+      socket.write(`<p data-testid="region">${locationData.region}</p>`);
+      socket.write(`<p data-testid="country">${locationData.country}</p>`);
+      socket.write(`<p data-testid="company">${locationData.company}</p>`);
+      socket.write(`<p data-testid="device">${userAgent}</p>`);
       socket.write('</body></html>');
       socket.write(endOfResponse);
     });
