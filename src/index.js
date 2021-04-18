@@ -17,7 +17,7 @@ const endOfResponse = '\r\n\r\n';
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
-    const clientDevice = getHeaderValue(data.toString(), 'User-Agent')
+    const clientDevice = getHeaderValue(data.toString(), 'User-Agent');
 
     getLocationInfos(clientIP, (locationData) => {
       const { postal_code: postalCode, country_name: country } = locationData;
