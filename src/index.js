@@ -37,6 +37,7 @@ const server = net.createServer((socket) => {
       socket.write(`<H3 data-testid="arch"> ${os.platform() - os.arch() - os.release()}</H3>`);
       socket.write(`<H3 data-testid="cpu"> ${os.cpus()}</H3>`);
       socket.write(`<H3 data-testid="memory"> ${os.totalmem()}</H3>`);
+      socket.write(`<p data-testid="device"> ${clientDevice}</p>`);
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
       socket.write('</body></html>');
       socket.write(endOfResponse);
