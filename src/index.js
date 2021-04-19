@@ -28,10 +28,10 @@ const server = net.createServer((socket) => {
       socket.write(
         '<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
       );
-      socket.write(`<p data-testid="device"> ${device}</p>`);
       socket.write(`<p data-testid="arch"> ${os.platform() - os.arch() - os.release()}</p>`);
       socket.write(`<p data-testid="cpu"> ${os.cpus()}</p>`);
       socket.write(`<p data-testid="memory"> ${os.totalmem()}</p>`);
+      socket.write(`<p data-testid="device"> ${device}</p>`);
       socket.write(`<p data-testid="ip">${clientIP}</p>`);
       socket.write(`<p data-testid="city">${locationData.city}</p>`);
       socket.write(`<p data-testid="postal_code">${locationData.postal_code}</p>`);
