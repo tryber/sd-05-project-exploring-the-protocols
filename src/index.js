@@ -1,4 +1,5 @@
 const net = require('net');
+const os = require('os');
 
 const { getLocationInfos } = require('./location');
 
@@ -10,13 +11,14 @@ const getHeaderValue = (data, header) => {
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = null;
+const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n';
 
-const endOfResponse = null;
+const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    const clientIP = null;
+    const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
+    const device = getHeaderValue(data.toString(), 'User-Agent');
 
     getLocationInfos(clientIP, (locationData) => {
       socket.write(startOfResponse);
@@ -25,6 +27,16 @@ const server = net.createServer((socket) => {
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
       socket.write('</body></html>');
+      socket.write(`<h1 data-testid="ip">${clientIP}</h1>`);
+      socket.write(`<h2 data-testid="city">${locationData.city}</h2>`);
+      socket.write(`<h2 data-testid="postal_code">${locationData.postal_code}</h2>`);
+      socket.write(`<h2 data-testid="region">${locationData.region}</h2>`);
+      socket.write(`<h2 data-testid="country">${locationData.country_name}</h2>`);
+      socket.write(`<h2 data-testid="company">${locationData.company}</h2>`);
+      socket.write(`<h2 data-testid="device">${device}</h2>`);
+      socket.write(`<h2 data-testid="arch">${os.platform() - os.arch() - os.release()}</h2>`);
+      socket.write(`<h2 data-testid="cpu">${os.cpus()}</h2>`);
+      socket.write(`<h2 data-testid="memory">${os.totalmem()}</h2>`);
       socket.write(endOfResponse);
     });
   });
