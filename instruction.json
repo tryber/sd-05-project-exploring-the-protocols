@@ -3,8 +3,7 @@
   "commandExtractNgrok": "unzip /path/to/ngrok.zip",
    "commandoToken": "./ngrok authtoken",
    "token": "1rYGGxeFTKB4Zp0lqDeXO7FTU3w_2Lvh1d25qn6ggEBvsGt97",
-   "installNgrokPackage": "npm install ngrock",
+   "installNgrokPackage": "npm install ngrok",
    "commandStart": "./ngrok https://localhost:8080",
    "commandNgrok": "./ngrok http 8080"
  }
- 
