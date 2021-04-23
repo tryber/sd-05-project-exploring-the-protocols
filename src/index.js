@@ -1,4 +1,5 @@
 const net = require('net');
+const os = require('os');
 
 const { getLocationInfos } = require('./location');
 
@@ -10,16 +11,28 @@ const getHeaderValue = (data, header) => {
   return headerData.split(': ').pop();
 };
 
-const startOfResponse = null;
+const startOfResponse = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n';
 
-const endOfResponse = null;
+const endOfResponse = '\r\n\r\n';
 
 const server = net.createServer((socket) => {
   socket.on('data', (data) => {
-    const clientIP = null;
+    const clientIP = getHeaderValue(data.toString(), 'X-Forwarded-For');
+    const device = getHeaderValue(data.toString(), 'User-Agent');
 
     getLocationInfos(clientIP, (locationData) => {
+      console.log(locationData);
       socket.write(startOfResponse);
+      socket.write(`<p data-testid="arch">${os.platform() - os.arch() - os.release()}</p>`);
+      socket.write(`<p data-testid="cpu">${os.cpu}</p>`);
+      socket.write(`<p data-testid="memory">${os.memory}</p>`);
+      socket.write(`<p data-testid="device">${device}</p>`);
+      socket.write(`<p data-testid="ip">${clientIP}</p>`);
+      socket.write(`<p data-testid="city">${locationData.city}</p>`);
+      socket.write(`<p data-testid="postal_code">${locationData.postal_code}</p>`);
+      socket.write(`<p data-testid="region">${locationData.region}</p>`);
+      socket.write(`<p data-testid="country">${locationData.country_name}</p>`);
+      socket.write(`<p data-testid="company">${locationData.company}</p>`);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
