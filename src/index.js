@@ -24,11 +24,13 @@ const server = net.createServer((socket) => {
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
       socket.write(`<h3 data-testid='ip'>client_ip: ${clientIP}</h3>`);
       socket.write(`<h3 data-testid='device'>client\`s device information: ${device}</h3>`);
-      socket.write(`<p data-testid='arch'>Base archteture of the System: ${system.arch}</p>`);
+      socket.write(`<p data-testid='arch'>Base archteture of the System: ${system.arch()}</p>`);
+      socket.write(`<p>Base OS of the System: ${system.platform()}</p>`);
+      socket.write(`<p>Base OS version of the System: ${system.release()}</p>`);
       socket.write(`<p data-testid='cpu'>Numbers of CPUs of System: ${system.cpus().length}</p>`);
 
       system.cpus().map((i, idx) => socket.write(`<p id=${idx}> CPU number ${idx + 1}: ${i.model} - ${i.speed}</p>`));
-      socket.write(`<p data-testid='memory'>client\`s System free memory: ${system.totalmem() / 1024 / 1024 / 1024} GB</p>`);
+      socket.write(`<p data-testid='memory'>client\`s System total memory: ${system.totalmem() / 1024 / 1024 / 1024} GB</p>`);
       socket.write(`<p data-testid='city'>client\`s city: ${locationData.city}</p>`);
       socket.write(`<p data-testid='posta_code'>client\`s postal code: ${locationData.postal_code}</p>`);
       socket.write(`<p data-testid='region'>client\`s region: ${locationData.region_name}</p>`);
