@@ -36,10 +36,10 @@ const server = net.createServer((socket) => {
       socket.write(`<p data-testid='region'>client\`s region: ${locationData.region_name}</p>`);
       socket.write(`<p data-testid='country'>client\`s country: ${locationData.country_name}</p>`);
       socket.write(`<p data-testid='company'>client\`s Internet service provider: ${locationData.isp}</p>`);
-      socket.write('</body></html>');
       socket.write(
         '<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
       );
+      socket.write('</body></html>');
       socket.write(endOfResponse);
     });
   });
