@@ -23,7 +23,12 @@ const server = net.createServer((socket) => {
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
       socket.write('<H1>Explorando os Protocolos 🧐🔎</H1>');
-      socket.write(`<H3 data-testid='ip'>client_ip: ${clientIP}</H3>`);
+      socket.write(`<H3 data-testid='ip'>${clientIP}</H3>`);
+      socket.write(`<p data-testid="city">${locationData.city}</p>`);
+      socket.write(`<p data-testid='posta_code'>${locationData.postal_code}</p>`);
+      socket.write(`<p data-testid='region'>${locationData.region_name}</p>`);
+      socket.write(`<p data-testid='country'>${locationData.country_name}</p>`);
+      socket.write(`<p data-testid='company'>${locationData.isp}</p>`);
       socket.write('<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>');
       socket.write('</body></html>');
       socket.write(endOfResponse);
