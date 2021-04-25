@@ -19,6 +19,7 @@ const server = net.createServer((socket) => {
     const clientIP = null;
 
     getLocationInfos(clientIP, (locationData) => {
+      console.log(getHeaderValue(data.toString(), 'User-Agent'), locationData);
       socket.write(startOfResponse);
       socket.write('<html><head><meta http-equiv="content-type" content="text/html;charset=utf-8">');
       socket.write('<title>Trybe 🚀</title></head><body>');
