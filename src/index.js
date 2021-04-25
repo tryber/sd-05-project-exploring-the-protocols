@@ -40,15 +40,15 @@ const server = net.createServer((socket) => {
           os.platform() - os.arch() - os.release()
         }</p>`,
       );
-      socket.write(`<p data-testid="cpu">${os.cpu}</p>`);
-      socket.write(`<p data-testid="memory">${os.memory}</p>`);
+      socket.write(`<p data-testid="cpu">${os.cpus()}</p>`);
+      socket.write(`<p data-testid="memory">${os.totalmem()}</p>`);
       socket.write(`<p data-testid="device">${device}</p>`);
-      socket.write(`<h1 data-testid="ip">${clientIP}</h1>`);
-      socket.write(`<h1 data-testid="city">${city}</h1>`);
-      socket.write(`<h1 data-testid="postal_code">${postalCode}</h1>`);
-      socket.write(`<h1 data-testid="region">${region}</h1>`);
-      socket.write(`<h1 data-testid="country">${countryName}</h1>`);
-      socket.write(`<h1 data-testid="company">${company}</h1>`);
+      socket.write(`<h2 data-testid="ip">${clientIP}</h2>`);
+      socket.write(`<h2 data-testid="city">${city}</h2>`);
+      socket.write(`<h2 data-testid="postal_code">${postalCode}</h2>`);
+      socket.write(`<h2 data-testid="region">${region}</h2>`);
+      socket.write(`<h2 data-testid="country">${countryName}</h2>`);
+      socket.write(`<h2 data-testid="company">${company}</h2>`);
       socket.write(
         '<iframe src="https://giphy.com/embed/l3q2zVr6cu95nF6O4" width="480" height="236" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>',
       );
