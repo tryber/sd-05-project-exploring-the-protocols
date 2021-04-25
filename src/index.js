@@ -1,7 +1,6 @@
 const net = require('net');
 const system = require('os');
 
-const PORT = 8080;
 const { getLocationInfos } = require('./location');
 
 const getHeaderValue = (data, header) => {
@@ -51,4 +50,4 @@ const server = net.createServer((socket) => {
   });
 });
 
-server.listen(PORT);
+server.listen(8080);
