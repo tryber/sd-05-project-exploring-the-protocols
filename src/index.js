@@ -1,6 +1,5 @@
 const net = require('net');
 const os = require('os');
-
 const { getLocationInfos } = require('./location');
 
 const getHeaderValue = (data, header) => {
